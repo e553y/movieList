@@ -1,10 +1,16 @@
 import MovieListEntry from './MovieListEntry.js';
+import Search from './Search.js';
 
-var MovieList = ({movies}) => (
+var MovieList = ({movies, onSearchButtonClick}) =>(
   <div className="movie-list container mb-3">
-    {movies.map((movie) => (
+    <Search onSearchButtonClick={onSearchButtonClick}/>
+    {
+      movies.length < 1 ? 
+        <MovieListEntry movie={{title:'Sorry, No movies to display...'}}/>:
+      movies.map((movie) => (
       <MovieListEntry movie={movie} />
-    ))}
+    ))
+    }
   </div>
 );
 
