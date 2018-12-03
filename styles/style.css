@@ -16,6 +16,10 @@
   color: #222;
 }
 
+.search-form input, button{
+  border: 1px solid #ddd;
+}
+
 .movie-list {
   display: table;
   border-collapse: collapse;
@@ -32,6 +36,7 @@
 .movie-name{
   margin-left: 1rem;
 }
+
 
 
 
