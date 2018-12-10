@@ -5,22 +5,24 @@ class App extends React.Component {
   constructor (props){
     super(props);
     this.state = {
-      active: this.props.data,
+      movies: this.props.data,
     };
   }
   
-  onSearchButtonClick(value){
-    //filter movies by seach term
-    let filtered = this.props.data.filter((movie)=> movie.title.toLowerCase().indexOf(value.toLowerCase()) !== -1);
-    //update state 
-    this.setState({
-      active: filtered,
-     });
-    
+  onToggleWatched(movie, watched) {
+    this.setState(function(prevState){
+      prevState.movies.find(currMovie => currMovie === movie).watched = watched;
+      return {
+        movies: prevState.movies
+      }
+    });
   }
   
   onAddClick(value) {
-    this.props.data.push({title: value});
+    this.props.data.push({title: value, watched: false});
+    this.setState({
+      movies: this.props.data
+    })
   }
   
   render(){
@@ -34,7 +36,7 @@ class App extends React.Component {
             <Add onAddClick={this.onAddClick.bind(this)}/>
           </div>
           <div className="mt-1">
-            <MovieList movies={this.state.active} isloading={this.state.movieListLoading} onSearchButtonClick ={this.onSearchButtonClick.bind(this)}/>
+            <MovieList movies={this.state.movies} onToggleWatched={this.onToggleWatched.bind(this)}/>
           </div>
         </div>
       </div>
